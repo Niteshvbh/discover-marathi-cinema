@@ -67,10 +67,13 @@ if selected_genres:
     tab1, tab2 = st.tabs(["🔍 Filtered Suggestions", "🤖 AI Recommendations"])
 
     with tab1:
-        # Local Filtered Suggestions
-        filtered_movies = df[df['genre'].str.contains('|'.join(selected_genres), case=False, na=False) & (df['primary_vibe'].str.lower() == selected_vibe.lower())]
-        st.markdown("### 🎬 Recommended Movies for Genres: " + ', '.join(selected_genres))
-        display_movies(filtered_movies)
+    filtered_movies = df[df['genre'].str.contains('|'.join(selected_genres), case=False, na=False)]
+
+    st.markdown("### 🎬 Recommended Movies for Genres: " + ', '.join(selected_genres))
+
+    # 👇 call display_movies only after filtered_movies is defined
+    display_movies(filtered_movies)
+
 
     with tab2:
         if "ai_movies" not in st.session_state:
