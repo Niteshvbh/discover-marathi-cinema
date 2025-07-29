@@ -43,10 +43,16 @@ def display_movies(movies_df):
                 with row[j]:
                     # ✅ Check if poster_url exists and is valid
                     poster = movie.get('poster_url', '')
-                    if isinstance(poster, str) and poster.startswith("http"):
+
+                    # Ensure poster is a string (convert from NaN) and strip whitespace
+                    poster = str(poster).strip()
+
+                    # Only display if it's a valid URL
+                    if poster.startswith("http"):
                         st.image(poster, use_container_width=True)
                     else:
                         st.markdown("🚫 *Poster not available*")
+
 
                     # Title and genre
                     st.markdown(
