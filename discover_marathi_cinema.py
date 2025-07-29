@@ -45,13 +45,19 @@ def display_movies(movies_df):
                     poster = movie.get('poster_url', '')
 
                     # Ensure poster is a string (convert from NaN) and strip whitespace
-                    poster = str(poster).strip()
+                    poster = str(movie.get('poster_url', '')).strip()
 
-                    # Only display if it's a valid URL
-                    if poster.startswith("http"):
-                        st.image(poster, use_container_width=True)
-                    else:
-                        st.markdown("🚫 *Poster not available*")
+                    try:
+                        if poster.startswith("http"):
+                            if not poster or not poster.startswith("http"):
+                                st.markdown("🚫 *Poster not available*")
+                                st.caption(f"(Missing or invalid URL: {poster})")
+                            st.image(poster, use_container_width=True)
+                        else:
+                            st.markdown("🚫 *Poster not available*")
+                    except Exception as e:
+                        st.warning("⚠️ Could not load image.")
+                        st.text(f"Error: {e}")
 
 
                     # Title and genre
