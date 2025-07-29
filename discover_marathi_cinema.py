@@ -33,28 +33,28 @@ selected_vibe = st.sidebar.selectbox(
 num_columns = 4
 num_movies = len(movies_df)
 
-    for i in range(0, num_movies, num_columns):
-        row = st.columns(num_columns)
-        for j in range(num_columns):
-            if i + j < num_movies:
-                movie = movies_df.iloc[i + j]
-                with row[j]:
-                    # ✅ Check if poster_url exists and is valid
-                    poster = movie.get('poster_url', '')
-                    if isinstance(poster, str) and poster.startswith("http"):
-                        st.image(poster, use_container_width=True)
-                    else:
-                        st.markdown("🚫 *Poster not available*")
+for i in range(0, num_movies, num_columns):
+    row = st.columns(num_columns)
+    for j in range(num_columns):
+        if i + j < num_movies:
+            movie = movies_df.iloc[i + j]
+            with row[j]:
+                # ✅ Check if poster_url exists and is valid
+                poster = movie.get('poster_url', '')
+                if isinstance(poster, str) and poster.startswith("http"):
+                    st.image(poster, use_container_width=True)
+                else:
+                    st.markdown("🚫 *Poster not available*")
 
                     # Title and genre
-                    st.markdown(
-                        f"<div style='text-align: center; font-weight: bold; margin-top: 8px;'>{movie['title']}</div>",
-                        unsafe_allow_html=True
-                    )
-                    st.markdown(
-                        f"<div style='text-align: center; font-style: italic;'>Genre: {movie['genre']}</div>",
-                        unsafe_allow_html=True
-                    )
+                st.markdown(
+                    f"<div style='text-align: center; font-weight: bold; margin-top: 8px;'>{movie['title']}</div>",
+                    unsafe_allow_html=True
+                )
+                st.markdown(
+                    f"<div style='text-align: center; font-style: italic;'>Genre: {movie['genre']}</div>",
+                    unsafe_allow_html=True
+                )
 
 
 st.markdown(f"""
