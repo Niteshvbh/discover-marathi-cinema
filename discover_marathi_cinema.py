@@ -67,12 +67,12 @@ if selected_genres:
     tab1, tab2 = st.tabs(["🔍 Filtered Suggestions", "🤖 AI Recommendations"])
 
     with tab1:
-    filtered_movies = df[df['genre'].str.contains('|'.join(selected_genres), case=False, na=False)]
+        filtered_movies = df[df['genre'].str.contains('|'.join(selected_genres), case=False, na=False)]
 
-    st.markdown("### 🎬 Recommended Movies for Genres: " + ', '.join(selected_genres))
+        st.markdown("### 🎬 Recommended Movies for Genres: " + ', '.join(selected_genres))
 
-    # 👇 call display_movies only after filtered_movies is defined
-    display_movies(filtered_movies)
+        # 👇 call display_movies only after filtered_movies is defined
+        display_movies(filtered_movies)
 
 
     with tab2:
