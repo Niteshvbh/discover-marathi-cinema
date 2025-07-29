@@ -29,22 +29,33 @@ selected_vibe = st.sidebar.selectbox(
     index=0
 )
 
-# Define reusable display function
-def display_movies(movies_df):
+# Define reusable display functiondef display_movies(movies_df):
     num_columns = 4
     num_movies = len(movies_df)
+
     for i in range(0, num_movies, num_columns):
         row = st.columns(num_columns)
         for j in range(num_columns):
             if i + j < num_movies:
                 movie = movies_df.iloc[i + j]
                 with row[j]:
-                    if pd.notna(movie['poster_url']) and str(movie['poster_url']).startswith("http"):
-                        st.image(movie['poster_url'], use_container_width=True)
+                    # ✅ Check if poster_url exists and is valid
+                    poster = movie.get('poster_url', '')
+                    if isinstance(poster, str) and poster.startswith("http"):
+                        st.image(poster, use_container_width=True)
                     else:
-                        st.markdown("🚫 Poster not available")
-                    st.markdown(f"<div style='text-align: center; font-weight: bold; margin-top: 8px;'>{movie['title']}</div>", unsafe_allow_html=True)
-                    st.markdown(f"<div style='text-align: center; font-style: italic;'>Genre: {movie['genre']}</div>", unsafe_allow_html=True)
+                        st.markdown("🚫 *Poster not available*")
+
+                    # Title and genre
+                    st.markdown(
+                        f"<div style='text-align: center; font-weight: bold; margin-top: 8px;'>{movie['title']}</div>",
+                        unsafe_allow_html=True
+                    )
+                    st.markdown(
+                        f"<div style='text-align: center; font-style: italic;'>Genre: {movie['genre']}</div>",
+                        unsafe_allow_html=True
+                    )
+
 
 st.markdown(f"""
 > *"Ready for a {selected_vibe} ride through Marathi cinema? 🎥 Let's go!"*
