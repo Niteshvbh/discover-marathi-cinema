@@ -30,8 +30,8 @@ selected_vibe = st.sidebar.selectbox(
 )
 
 # Define reusable display functiondef display_movies(movies_df):
-    num_columns = 4
-    num_movies = len(movies_df)
+num_columns = 4
+num_movies = len(movies_df)
 
     for i in range(0, num_movies, num_columns):
         row = st.columns(num_columns)
