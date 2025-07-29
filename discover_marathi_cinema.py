@@ -52,6 +52,7 @@ def display_movies(movies_df):
                             if not poster or not poster.startswith("http"):
                                 st.markdown("🚫 *Poster not available*")
                                 st.caption(f"(Missing or invalid URL: {poster})")
+                            st.caption(f"Poster URL: {poster}")
                             st.image(poster, use_container_width=True)
                         else:
                             st.markdown("🚫 *Poster not available*")
