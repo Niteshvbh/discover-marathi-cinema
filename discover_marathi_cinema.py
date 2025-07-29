@@ -39,7 +39,10 @@ def display_movies(movies_df):
             if i + j < num_movies:
                 movie = movies_df.iloc[i + j]
                 with row[j]:
-                    st.image(movie['poster_url'], use_container_width=True)
+                    if pd.notna(movie['poster_url']) and str(movie['poster_url']).startswith("http"):
+                        st.image(movie['poster_url'], use_container_width=True)
+                    else:
+                        st.markdown("🚫 Poster not available")
                     st.markdown(f"<div style='text-align: center; font-weight: bold; margin-top: 8px;'>{movie['title']}</div>", unsafe_allow_html=True)
                     st.markdown(f"<div style='text-align: center; font-style: italic;'>Genre: {movie['genre']}</div>", unsafe_allow_html=True)
 
